@@ -19,6 +19,11 @@
     </div>
 </template>
 
+<style lang="scss">
+#app {
+  overflow-y: auto;
+}
+</style>
 <script>
 import { db } from '@/db'
 import NonprofitListItem from '@/components/NonprofitListItem.vue'
