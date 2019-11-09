@@ -1,0 +1,23 @@
+{
+  "name": "np-compete",
+  "version": "1.0.0",
+  "description": "The greatest repo for the greatest name for the greatest idea",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "firebase-tools": "^7.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkarim0598/np-compete.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rkarim0598/np-compete/issues"
+  },
+  "homepage": "https://github.com/rkarim0598/np-compete#readme"
+}
