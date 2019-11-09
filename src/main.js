@@ -15,6 +15,8 @@ import {
 	MdList,
 	MdTabs,
 	MdToolbar,
+	MdCard,
+	MdRipple
 } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
@@ -29,7 +31,8 @@ Vue.use(MdIcon)
 Vue.use(MdList)
 Vue.use(MdTabs)
 Vue.use(MdToolbar)
-
+Vue.use(MdCard)
+Vue.use(MdRipple)
 Vue.config.productionTip = false
 
 Vue.filter('currency', num =>

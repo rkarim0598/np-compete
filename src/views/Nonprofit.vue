@@ -62,12 +62,9 @@
 
 <style lang="scss">
 .nonprofit-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
   justify-content: center;
   .nonprofit-view {
-    width: 93%;
+    width: 100%;
 
     .md-toolbar {
       margin-top: 20px;
@@ -83,9 +80,6 @@
 
     .header-card {
       display: flex;
-      box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
-        0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
-      height: 80%;
       .header-container {
         margin: 10px;
         width: 100%;
@@ -95,7 +89,7 @@
         justify-content: space-between;
         .header-top {
           height: 45%;
-          width: 60%;
+          width: 100%;
           display: flex;
           flex-direction: row;
           img {
@@ -124,10 +118,12 @@
             }
             .da-button-share {
               @include da-button(blue);
+			  margin-left: 8px;
             }
 
             .da-button-twitter {
               @include da-button(#1dcaff);
+			  margin-left: 8px;
             }
           }
         }

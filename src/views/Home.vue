@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<h2>Make a difference to what matters to you</h2>
+		<h2 class="header">Make a difference to what matters to you</h2>
 		<p>Your donations go farther with <strong>NP Compete</strong>.</p>
 
 		<div class="md-layout md-gutter">
@@ -39,6 +39,16 @@
 		</div>
 	</div>
 </template>
+
+<style lang="scss">
+	.home {
+		margin: 10px;
+		margin-top: 0px;
+	}
+	.header {
+		padding-top: 10px;
+	}
+</style>
 
 <script>
 import { db } from '@/db'
