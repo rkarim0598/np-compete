@@ -31,6 +31,9 @@ export default {
 				this.$bind('nonprofit', nonprofits.doc(to.params.id))
 			},
 		},
+		nonprofit (nonprofit) {
+			document.title = `${nonprofit.name} - NP Compete`
+		},
 	},
 }
 </script>

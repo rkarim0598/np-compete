@@ -11,6 +11,17 @@
 	</div>
 </template>
 
+<script>
+export default {
+	watch: {
+		$route (to) {
+			console.log(to)
+			if (to.meta.title) document.title = to.meta.title
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 #app {
 	-webkit-font-smoothing: antialiased;

@@ -82,6 +82,8 @@ export default {
         },
         nonprofit: {
             handler() {
+                document.title = `Donate to ${this.nonprofit.name} - NP Compete`
+
                 this.$nextTick(function () {
                     if(!this.nonprofit) return;
 
