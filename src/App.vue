@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<md-toolbar>
-			<h1><router-link to="/">NP Complete</router-link></h1>
+			<h1><router-link to="/">NP Compete</router-link></h1>
 			<md-button to="/nonprofits">All nonprofits</md-button>
 			<md-button to="/about">About</md-button>
 		</md-toolbar>
