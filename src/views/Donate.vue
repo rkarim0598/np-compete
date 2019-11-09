@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="donate-container">
 		<template v-if="nonprofit">
-			<h2>Donating to {{ nonprofit && nonprofit.name }}</h2>
+			<h2 class="header">Donating to {{ nonprofit && nonprofit.name }}</h2>
             <form class="md-layout" v-on:submit="charge" action="https://us-central1-np-compete.cloudfunctions.net/donate" method="post" id="payment-form">
                 
                 <md-field>
@@ -44,6 +44,16 @@
 		</template>
 	</div>
 </template>
+
+<style lang="scss">
+    .donate-container {
+        margin: 10px;
+        margin-top: 0px;
+    }
+    .header {
+        padding-top: 10px;
+    }
+</style>
 
 <script>
 import { db } from '@/db'

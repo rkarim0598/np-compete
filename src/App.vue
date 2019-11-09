@@ -8,7 +8,6 @@
       <md-button to="/about">About</md-button>
     </md-toolbar>
     <md-content class="main-content">
-      <!-- <md-content id="app-container"> -->
       <router-view />
     </md-content>
   </div>
@@ -33,10 +32,6 @@ export default {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  #app-container {
-    height: 100%;
-    width: 100%;
-  }
 }
 
 h1 {
@@ -48,6 +43,5 @@ h1 {
   background-color: transparent;
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
-  height: 85%;
 }
 </style>
