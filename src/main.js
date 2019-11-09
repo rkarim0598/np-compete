@@ -7,6 +7,7 @@ import { firestorePlugin } from 'vuefire'
 
 import {
 	MdButton,
+	MdCheckbox,
 	MdContent,
 	MdDivider,
 	MdField,
@@ -20,6 +21,7 @@ import 'vue-material/dist/theme/default.css'
 
 Vue.use(firestorePlugin)
 Vue.use(MdButton)
+Vue.use(MdCheckbox)
 Vue.use(MdContent)
 Vue.use(MdDivider)
 Vue.use(MdField)
