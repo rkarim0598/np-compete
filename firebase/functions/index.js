@@ -43,3 +43,5 @@ exports.test = functions.firestore
 			authorized: true,
 		}, { merge: true });
 	});
+
+exports.donate = require('./donate').donate;
