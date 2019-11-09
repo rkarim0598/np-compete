@@ -6,6 +6,7 @@
 			<md-button to="/about">About</md-button>
 		</md-toolbar>
 		<md-content class="main-content">
+		<!-- <md-content id="app-container"> -->
 			<router-view/>
 		</md-content>
 	</div>
@@ -27,6 +28,13 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: #2c3e50;
+	height: 100vh;
+	width: 100vw;	
+	overflow-x: hidden;
+	#app-container {
+		height: 100%;
+		width: 100%;
+	}
 }
 
 h1 {
