@@ -9,6 +9,8 @@ import {
 	MdButton,
 	MdContent,
 	MdDivider,
+	MdField,
+	MdIcon,
 	MdList,
 	MdTabs,
 	MdToolbar,
@@ -20,6 +22,8 @@ Vue.use(firestorePlugin)
 Vue.use(MdButton)
 Vue.use(MdContent)
 Vue.use(MdDivider)
+Vue.use(MdField)
+Vue.use(MdIcon)
 Vue.use(MdList)
 Vue.use(MdTabs)
 Vue.use(MdToolbar)

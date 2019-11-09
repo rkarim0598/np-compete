@@ -5,7 +5,7 @@
 			<md-button to="/nonprofits">All nonprofits</md-button>
 			<md-button to="/about">About</md-button>
 		</md-toolbar>
-		<md-content>
+		<md-content class="main-content">
 			<router-view/>
 		</md-content>
 	</div>
@@ -20,5 +20,10 @@
 
 h1 {
 	flex: 1;
+}
+
+.main-content {
+	margin: 0 10%;
+	background-color: transparent;
 }
 </style>
