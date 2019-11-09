@@ -1,26 +1,55 @@
 <template>
     <div>
         <h2>All nonprofits</h2>
-        <ul v-for="nonprofit in nonprofits" :key="nonprofit.id">
-            <li>
-                <router-link :to="'/nonprofits/' + nonprofit.id">{{ nonprofit.name }}</router-link>
-            </li>
-        </ul>
+
+        <md-field md-clearable>
+            <label>Search</label>
+            <md-input v-model="search"></md-input>
+        </md-field>
+
+        <md-list class="md-triple-line" v-if="filteredNonprofits.length">
+            <template v-for="(nonprofit, index) in filteredNonprofits">
+                <md-divider v-if="index !== 0"></md-divider>
+                <NonprofitListItem :nonprofit="nonprofit" :key="nonprofit.id" />
+            </template>
+        </md-list>
+        <p v-else>
+            No nonprofits found<template v-if="search"> matching "{{ search }}". Try searching again</template>.
+        </p>
     </div>
 </template>
 
+<style lang="scss">
+#app {
+  overflow-y: auto;
+}
+</style>
 <script>
 import { db } from '@/db'
+import NonprofitListItem from '@/components/NonprofitListItem.vue'
 
 export default {
-  data() {
-    return {
-      nonprofits: [],
-    }
-  },
+    components: {
+        NonprofitListItem,
+    },
 
-  firestore: {
-    nonprofits: db.collection('nonprofits'),
-  },
+    data() {
+        return {
+            nonprofits: [],
+            search: '',
+        }
+    },
+
+    computed: {
+        filteredNonprofits () {
+            return this.nonprofits.filter(function (nonprofit) {
+                return nonprofit.name.toLowerCase().includes(this.search.toLowerCase())
+            }, this)
+        },
+    },
+
+    firestore: {
+        nonprofits: db.collection('nonprofits').orderBy('name'),
+    },
 }
 </script>
