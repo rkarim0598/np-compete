@@ -30,7 +30,7 @@ export default {
 	color: #2c3e50;
 	height: 100vh;
 	width: 100vw;	
-	overflow-x: hidden;
+	overflow: hidden;
 	#app-container {
 		height: 100%;
 		width: 100%;
