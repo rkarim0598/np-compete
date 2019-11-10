@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <md-card>
+  <div class="md-layout md-gutter">
+    <md-card class="md-layout-item">
       <md-card-header>
     <div class="md-title">Our Mission 
 
@@ -17,34 +17,36 @@
 
       
   
-
+<div class="md-layout-item">
    <md-card>
      <md-card-header>
        <md-card-header-text>
          <div class="md-title"> John Meyer</div>
-         <div class="md-subhead">Senior - Likes pickles but does not like pineapples</div>
+         <div class="md-subhead">Senior - Dunne Hall , part of Notre Dame Chorale</div>
         
          </md-card-header-text>
          
       </md-card-header>
 
    </md-card>
+  
    <md-card>
      <md-card-header>
        <md-card-header-text>
          <div class="md-title"> Rayyan Karim</div>
-         <div class="md-subhead">Senior - He's big on home cooking. Hopes to become chef after graduating</div>
-        
+         <div class="md-subhead">Senior - Ex-weasel </div>
          </md-card-header-text>
          
       </md-card-header>
 
    </md-card>
+</div>
+<div class="md-layout-item last-column">
    <md-card>
      <md-card-header>
        <md-card-header-text>
          <div class="md-title"> Stephen Meyer</div>
-         <div class="md-subhead">Junior - I have to think about that one</div>
+         <div class="md-subhead">Junior - Sorin Hall, part of The Observer</div>
         
          </md-card-header-text>
          
@@ -55,21 +57,27 @@
      <md-card-header>
        <md-card-header-text>
          <div class="md-title"> Jorge Visbal</div>
-         <div class="md-subhead">Freshman - Krispy Kreme connoisseur</div>
+         <div class="md-subhead">Freshman - Alumni Hall, Spikeball club</div>
         
          </md-card-header-text>
          
       </md-card-header>
 
    </md-card>
+   </div>
  </div>
 </template>
 <style lang="scss" scoped>
- .md-card {
-   width: 320px;
-   margin: 4px;
-   display: inline-block;
-   vertical-align: top;
+ .last-column{
+   margin-left:0;
+  
+
  }
- </style>
+ .md-layout-item{
+height:100%;
+
+
+
+ }
+  </style>
  
