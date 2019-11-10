@@ -14,6 +14,9 @@
                 <span
                   class="md-title"
                 >{{ `${nonprofit.votes} ${nonprofit.votes != 1 ? 'votes' : 'vote'}` }}</span>
+                <span
+                  class="md-title"
+                >{{ `${numMentions} ${numMentions != 1 ? 'Twitter votes' : 'Twitter vote'}`}}</span>
                 <md-button :to="`${nonprofit.id}/donate`" class="md-raised da-button-donate">Donate</md-button>
                 <md-button :href="tweetUrl" class="md-raised da-button-twitter">Vote</md-button>
               </div>
@@ -28,7 +31,9 @@
               >Visit our website to learn how you can help us!</a>
             </div>
             <div class="md-layout md-gutter">
-              <md-list class="md-triple-line md-layout-item md-large-size-50 md-small-size-100 md-xsmall-size-100">
+              <md-list
+                class="md-triple-line md-layout-item md-large-size-50 md-small-size-100 md-xsmall-size-100"
+              >
                 <h3>Recent donations to {{ nonprofit.name }}</h3>
                 <template v-for="(donation, index) in filteredDonations">
                   <md-divider v-if="index !== 0"></md-divider>
@@ -148,6 +153,37 @@
 </style>
 
 <script>
+const TweetJs = {
+  ListTweetsOnUserTimeline: function(screenName, callback) {
+    TweetJs._callApi(
+      {
+        Action: "ListTweetsOnUserTimeline",
+        ScreenName: screenName
+      },
+      callback
+    );
+  },
+  Search: function(query, callback) {
+    TweetJs._callApi(
+      {
+        Action: "Search",
+        Query: query
+      },
+      callback
+    );
+  },
+  _callApi: function(request, callback) {
+    var xhr = new XMLHttpRequest();
+    URL = "https://www.tweetjs.com/API.aspx";
+    xhr.open("POST", URL);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        callback(JSON.parse(xhr.response));
+      }
+    };
+    xhr.send(JSON.stringify(request));
+  }
+};
 import { db } from "@/db";
 import { makeTweetUrl } from "@/utils";
 
@@ -158,7 +194,8 @@ export default {
   data() {
     return {
       nonprofit: null,
-      npDonations: null
+      npDonations: null,
+      numMentions: 0
     };
   },
   computed: {
@@ -179,11 +216,14 @@ export default {
         this.$bind("nonprofit", nonprofits.doc(to.params.id));
         this.$bind("npDonations", donations);
       }
-    },
+	},
+	numMentions: function() {
+		console.log(this.numMentions)
+	},
     nonprofit: function() {
-      console.log(
-        this.nonprofit.location._lat + " " + this.nonprofit.location._long
-      );
+      TweetJs.Search(this.nonprofit.hashtag, (data) => {
+		  this.numMentions = data.statuses.length;
+      })
     }
   }
 };
