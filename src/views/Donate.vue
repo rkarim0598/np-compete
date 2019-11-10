@@ -2,15 +2,18 @@
 	<div class="donate-container">
 		<template v-if="nonprofit">
 			<h2 class="header">Donating to {{ nonprofit && nonprofit.name }}</h2>
-            <form class="md-layout" v-on:submit="charge" action="https://us-central1-np-compete.cloudfunctions.net/donate" method="post" id="payment-form">
+
+            <md-button :to="'.'">&lt; Back</md-button>
+
+            <form class="md-layout donate-form" v-on:submit="charge" action="https://us-central1-np-compete.cloudfunctions.net/donate" method="post" id="payment-form">
                 
                 <md-field>
-                    <label>Your Name</label>
+                    <label>Name</label>
                     <md-input name="name"></md-input>
                 </md-field>
                 <md-field>
-                    <label>Your Email</label>
-                    <md-input name="email"></md-input>
+                    <label>Email</label>
+                    <md-input name="email" type="email"></md-input>
                 </md-field>
                 <md-checkbox name="anonymous" v-model="anonymous">Anonymous</md-checkbox>
                 <div style="width:100%">
@@ -28,14 +31,14 @@
                 <md-field>
                     <label>Amount</label>
                     <span class="md-prefix">$</span>
-                    <md-input name="amount"></md-input>
+                    <md-input name="amount" type="number" step="0.01"></md-input>
                 </md-field>
                 <input name="npid" type="hidden" v-bind:value="nonprofit.id">
                 <input name="np" type="hidden" v-bind:value="nonprofit.name">
 
                 <br/>
                 <br/>
-                <md-button type="submit" class="md-primary" :disabled="sending" style="margin-left: 0px;">Donate</md-button>
+                <md-button type="submit" class="md-raised md-primary" :disabled="sending" style="margin-left: 0px;">Donate</md-button>
             </form>
 		</template>
 		<template v-else>
@@ -46,13 +49,13 @@
 </template>
 
 <style lang="scss">
-    .donate-container {
-        margin: 10px;
-        margin-top: 0px;
-    }
-    .header {
-        padding-top: 10px;
-    }
+.donate-container {
+    padding: 30px;
+}
+
+.donate-form {
+    max-width: 500px;
+}
 </style>
 
 <script>

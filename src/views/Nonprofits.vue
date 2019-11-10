@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="all-nonprofits">
         <h2>All nonprofits</h2>
 
         <md-field md-clearable>
@@ -20,10 +20,11 @@
 </template>
 
 <style lang="scss">
-#app {
-  overflow-y: auto;
+.all-nonprofits {
+    padding: 30px;
 }
 </style>
+
 <script>
 import { db } from '@/db'
 import NonprofitListItem from '@/components/NonprofitListItem.vue'

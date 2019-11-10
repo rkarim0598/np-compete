@@ -12,10 +12,12 @@
                 src="https://cdn.greatnonprofits.org/images/uploads/organizations/fbcover_101536093171036740.jpg"
               />
               <div class="button-container">
+                <span v-if="nonprofit.location">
                 <a
                   :href="`http://maps.google.com/maps?q=${nonprofit.location._lat},${nonprofit.location._long}`"
                   class="md-body-1"
                 >Directions</a>
+                </span>
                 <md-button class="md-raised da-button-donate">Donate</md-button>
                 <md-button class="md-raised da-button-share">Share</md-button>
                 <md-button class="md-raised da-button-twitter">Tweet to Vote</md-button>

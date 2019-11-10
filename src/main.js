@@ -5,6 +5,8 @@ import router from './router'
 
 import { firestorePlugin } from 'vuefire'
 
+import { formatDistance } from 'date-fns'
+
 import {
 	MdButton,
 	MdCheckbox,
@@ -38,6 +40,8 @@ Vue.config.productionTip = false
 Vue.filter('currency', num =>
 	typeof num === 'number' ? `${ num < 0 ? '\u2212' : '' }$${ Math.abs(num).toFixed(2) }` : num
 )
+
+Vue.filter('dateRelative', date => formatDistance(date, new Date()))
 
 new Vue({
 	router,

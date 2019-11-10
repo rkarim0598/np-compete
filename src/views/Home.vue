@@ -1,18 +1,33 @@
 <template>
-	<div class="home">
-		<h2 class="header">Make a difference to what matters to you</h2>
-		<p>Your donations go farther with <strong>NP Compete</strong>.</p>
+	<div>
+		<div class="hero">
+			<h2 class="header">Make a difference to what matters to you</h2>
+			<p>Your donations go farther with <strong>NP Compete</strong>.</p>
+		</div>
 
+	<div class="home">
 		<div class="md-layout md-gutter">
 			<section class="md-layout-item md-small-size-50 md-xsmall-size-100">
 				<h3>Featured nonprofits</h3>
 
-				<md-list class="md-triple-line">
-					<template v-for="(nonprofit, index) in nonprofitsFeatured">
-						<md-divider v-if="index !== 0"></md-divider>
-						<NonprofitListItem :nonprofit="nonprofit" :key="nonprofit.id" />
-					</template>
-				</md-list>
+				<md-tabs>
+					<md-tab id="tab-featured" md-label="Featured" md-icon="star">
+						<md-list class="md-triple-line">
+							<template v-for="(nonprofit, index) in nonprofitsFeatured">
+								<md-divider v-if="index !== 0"></md-divider>
+								<NonprofitListItem :nonprofit="nonprofit" :key="nonprofit.id" />
+							</template>
+						</md-list>
+					</md-tab>
+					<md-tab id="tab-popular" md-label="Popular" md-icon="flag">
+						<md-list class="md-triple-line">
+							<template v-for="(nonprofit, index) in nonprofitsPopular">
+								<md-divider v-if="index !== 0"></md-divider>
+								<NonprofitListItem :nonprofit="nonprofit" :key="nonprofit.id" />
+							</template>
+						</md-list>
+					</md-tab>
+				</md-tabs>
 
 				<md-button to="/nonprofits/">See all</md-button>
 			</section>
@@ -30,7 +45,7 @@
 									<strong>{{ donation.amount | currency }}</strong> to
 									<strong><router-link :to="'/nonprofits/' + donation.np.id">{{ donation.np.name }}</router-link></strong>
 								</span>
-								<span>{{ donation.timestamp.toDate() }}</span>
+								<span>{{ donation.timestamp.toDate() | dateRelative }} ago</span>
 							</div>
 						</md-list-item>
 					</template>
@@ -38,16 +53,22 @@
 			</section>
 		</div>
 	</div>
+	</div>
 </template>
 
 <style lang="scss">
-	.home {
-		margin: 10px;
-		margin-top: 0px;
-	}
-	.header {
-		padding-top: 10px;
-	}
+.home {
+	padding: 30px;
+}
+
+.hero {
+	padding: 200px 100px;
+	background-image: url('../assets/hero.jpg');
+	background-size: cover;
+	background-position: center;
+	color: white;
+	font-size: 1.5em;
+}
 </style>
 
 <script>
@@ -70,7 +91,8 @@ export default {
 
 	firestore: {
 		donations: db.collection('donations').orderBy('timestamp', 'desc').limit(5),
-		nonprofitsFeatured: db.collection('nonprofits').where('featured', '==', true).orderBy('name')
+		nonprofitsFeatured: db.collection('nonprofits').where('featured', '==', true).orderBy('name'),
+		nonprofitsPopular: db.collection('nonprofits').orderBy('votes', 'desc').limit(5),
 	},
 }
 </script>
