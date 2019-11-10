@@ -91,7 +91,7 @@
       background-color: rgb(182, 18, 27);
 
       .md-title {
-        width: 90%;
+        width: 100%;
         text-align: center;
         color: white;
       }
