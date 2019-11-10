@@ -8,7 +8,7 @@
         <md-card-content class="header-card">
           <div class="header-container">
             <div class="header-top">
-              <img
+              <img v-if="nonprofit.image"
                 src="https://cdn.greatnonprofits.org/images/uploads/organizations/fbcover_101536093171036740.jpg"
               />
               <div class="button-container">
