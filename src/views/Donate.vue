@@ -31,7 +31,7 @@
                 <md-field>
                     <label>Amount</label>
                     <span class="md-prefix">$</span>
-                    <md-input name="amount" type="number"></md-input>
+                    <md-input name="amount" type="number" step="0.01"></md-input>
                 </md-field>
                 <input name="npid" type="hidden" v-bind:value="nonprofit.id">
                 <input name="np" type="hidden" v-bind:value="nonprofit.name">

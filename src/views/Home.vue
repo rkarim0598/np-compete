@@ -10,12 +10,24 @@
 			<section class="md-layout-item md-small-size-50 md-xsmall-size-100">
 				<h3>Featured nonprofits</h3>
 
-				<md-list class="md-triple-line">
-					<template v-for="(nonprofit, index) in nonprofitsFeatured">
-						<md-divider v-if="index !== 0"></md-divider>
-						<NonprofitListItem :nonprofit="nonprofit" :key="nonprofit.id" />
-					</template>
-				</md-list>
+				<md-tabs>
+					<md-tab id="tab-featured" md-label="Featured" md-icon="star">
+						<md-list class="md-triple-line">
+							<template v-for="(nonprofit, index) in nonprofitsFeatured">
+								<md-divider v-if="index !== 0"></md-divider>
+								<NonprofitListItem :nonprofit="nonprofit" :key="nonprofit.id" />
+							</template>
+						</md-list>
+					</md-tab>
+					<md-tab id="tab-popular" md-label="Popular" md-icon="flag">
+						<md-list class="md-triple-line">
+							<template v-for="(nonprofit, index) in nonprofitsPopular">
+								<md-divider v-if="index !== 0"></md-divider>
+								<NonprofitListItem :nonprofit="nonprofit" :key="nonprofit.id" />
+							</template>
+						</md-list>
+					</md-tab>
+				</md-tabs>
 
 				<md-button to="/nonprofits/">See all</md-button>
 			</section>
@@ -79,7 +91,8 @@ export default {
 
 	firestore: {
 		donations: db.collection('donations').orderBy('timestamp', 'desc').limit(5),
-		nonprofitsFeatured: db.collection('nonprofits').where('featured', '==', true).orderBy('name')
+		nonprofitsFeatured: db.collection('nonprofits').where('featured', '==', true).orderBy('name'),
+		nonprofitsPopular: db.collection('nonprofits').orderBy('votes', 'desc').limit(5),
 	},
 }
 </script>

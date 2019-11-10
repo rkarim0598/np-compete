@@ -32,6 +32,10 @@ export default {
 
 h1 {
   flex: 1;
+
+  a {
+    color: inherit !important;
+  }
 }
 
 .main-content {
