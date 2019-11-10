@@ -8,11 +8,9 @@
         <md-card-content class="header-card">
           <div class="header-container">
             <div class="header-top">
-              <img v-if="nonprofit.image"
-                src="https://cdn.greatnonprofits.org/images/uploads/organizations/fbcover_101536093171036740.jpg"
-              />
+              <img v-if="nonprofit.image" :src="nonprofit.image" />
               <div class="button-container">
-                <span class="md-title hashtag">#{{ nonprofit.hashtag }}</span>
+                <span class="md-subheading hashtag">#{{ nonprofit.hashtag }}</span>
                 <span
                   class="md-title"
                 >{{ `${nonprofit.votes} ${nonprofit.votes != 1 ? 'votes' : 'vote'}` }}</span>
@@ -29,7 +27,7 @@
               >Visit our website to learn how you can help us!</a>
             </div>
             <div class="md-layout md-gutter">
-              <md-list class="md-triple-line md-layout-item md-large-size-50">
+              <md-list class="md-triple-line md-layout-item md-large-size-50 md-small-size-100 md-xsmall-size-100">
                 <template v-for="(donation, index) in filteredDonations">
                   <md-divider v-if="index !== 0"></md-divider>
                   <md-list-item :key="donation.id">
@@ -44,7 +42,7 @@
                 </template>
               </md-list>
               <iframe
-			  	v-if="nonprofit.location"
+                v-if="nonprofit.location"
                 class="md-layout-item"
                 frameborder="0"
                 style="border:0"
@@ -68,7 +66,7 @@
 
 <style lang="scss">
 .hashtag {
-	font-style: italic;
+  font-style: italic;
 }
 .image-container {
   display: flex;
@@ -118,15 +116,13 @@
             width: 40%;
             align-items: center;
             justify-content: space-evenly;
-
             @mixin da-button($color) {
               width: 60%;
               height: 15%;
               min-width: 120px;
-			  min-height: 40px;
+              min-height: 40px;
               background-color: $color;
               color: white;
-
             }
 
             .da-button-donate {
@@ -158,10 +154,10 @@
 
 <script>
 import { db } from "@/db";
-import { makeTweetUrl } from '@/utils'
+import { makeTweetUrl } from "@/utils";
 
 const nonprofits = db.collection("nonprofits");
-const donations = db.collection("donations");
+const donations = db.collection("donations").orderBy("timestamp", "desc");
 
 export default {
   data() {
@@ -171,8 +167,8 @@ export default {
     };
   },
   computed: {
-    tweetUrl () {
-      return makeTweetUrl(this.nonprofit)
+    tweetUrl() {
+      return makeTweetUrl(this.nonprofit);
     },
     filteredDonations: function() {
       return this.npDonations
