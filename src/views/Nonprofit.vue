@@ -14,31 +14,13 @@
               <div class="button-container">
                 <span v-if="nonprofit.location">
                 <a
+                  v-if="nonprofit.location"
                   :href="`http://maps.google.com/maps?q=${nonprofit.location._lat},${nonprofit.location._long}`"
                   class="md-body-1"
                 >Directions</a>
-                </span>
-                <md-button class="md-raised da-button-donate">Donate</md-button>
-                <md-button class="md-raised da-button-share">Share</md-button>
+                <md-button :to="`${nonprofit.id}/donate`" class="md-raised da-button-donate">Donate</md-button>
                 <md-button class="md-raised da-button-twitter">Tweet to Vote</md-button>
               </div>
-
-              <md-list class="md-triple-line">
-                <template v-for="(donation) in filteredDonations">
-                  <md-list-item :key="donation.id">
-                    <div class="md-list-item-text">
-                      <span>
-                        <strong>{{ donation.anonymous ? 'Anonymous' : donation.name }}</strong> donated
-                        <strong>{{ donation.amount | currency }}</strong> to
-                        <strong>
-                          <router-link :to="'/nonprofits/' + donation.np.id">{{ donation.np.name }}</router-link>
-                        </strong>
-                      </span>
-                      <span>{{ donation.timestamp.toDate() }}</span>
-                    </div>
-                  </md-list-item>
-                </template>
-              </md-list>
             </div>
             <div class="header-bottom">
               <span class="md-title">About Us</span>
@@ -47,6 +29,28 @@
                 :href="nonprofit.website"
                 class="md-body-1"
               >Visit our website to learn how you can help us!</a>
+            </div>
+            <div class="md-layout md-gutter">
+              <md-list class="md-triple-line md-layout-item md-large-size-50">
+                <template v-for="(donation) in filteredDonations">
+                  <md-list-item :key="donation.id">
+                    <div class="md-list-item-text">
+                      <span>
+                        <strong>{{ donation.anonymous ? 'Anonymous' : donation.name }}</strong> donated
+                        <strong>{{ donation.amount | currency }}</strong>
+                      </span>
+                      <span>{{ donation.timestamp.toDate() }}</span>
+                    </div>
+                  </md-list-item>
+                </template>
+              </md-list>
+              <!-- <iframe
+                class="md-layout-item"
+                frameborder="0"
+                style="border:0"
+                :src="`https://www.google.com/maps/embed/v1/location?center=${nonprofit.location._lat},${nonprofit.location._long}&zoom=8&key=AIzaSyCFtSAQ7lAc-LZUQzfmNQ5zE5zqYLcjzAI`"
+                allowfullscreen
+              ></iframe> -->
             </div>
           </div>
         </md-card-content>
@@ -63,6 +67,11 @@
 </template>
 
 <style lang="scss">
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .nonprofit-container {
   justify-content: center;
   .nonprofit-view {
@@ -120,12 +129,12 @@
             }
             .da-button-share {
               @include da-button(blue);
-			  margin-left: 8px;
+              margin-left: 8px;
             }
 
             .da-button-twitter {
               @include da-button(#1dcaff);
-			  margin-left: 8px;
+              margin-left: 8px;
             }
           }
         }
@@ -152,7 +161,7 @@ export default {
   data() {
     return {
       nonprofit: null,
-      npDonations: null
+      npDonations: null,
     };
   },
   computed: {
