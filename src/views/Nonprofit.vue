@@ -12,8 +12,12 @@
                 src="https://cdn.greatnonprofits.org/images/uploads/organizations/fbcover_101536093171036740.jpg"
               />
               <div class="button-container">
+                <span class="md-title hashtag">#{{ nonprofit.hashtag }}</span>
+                <span
+                  class="md-title"
+                >{{ `${nonprofit.votes} ${nonprofit.votes != 1 ? 'votes' : 'vote'}` }}</span>
                 <md-button :to="`${nonprofit.id}/donate`" class="md-raised da-button-donate">Donate</md-button>
-                <md-button :href="tweetUrl" class="md-raised da-button-twitter">Tweet to Vote</md-button>
+                <md-button :href="tweetUrl" class="md-raised da-button-twitter">Vote</md-button>
               </div>
             </div>
             <div class="header-bottom">
@@ -26,19 +30,21 @@
             </div>
             <div class="md-layout md-gutter">
               <md-list class="md-triple-line md-layout-item md-large-size-50">
-                <template v-for="(donation) in filteredDonations">
+                <template v-for="(donation, index) in filteredDonations">
+                  <md-divider v-if="index !== 0"></md-divider>
                   <md-list-item :key="donation.id">
                     <div class="md-list-item-text">
                       <span>
                         <strong>{{ donation.anonymous ? 'Anonymous' : donation.name }}</strong> donated
                         <strong>{{ donation.amount | currency }}</strong>
                       </span>
-                      <span>{{ donation.timestamp.toDate() }}</span>
+                      <span>{{ donation.timestamp.toDate() | dateRelative }} ago</span>
                     </div>
                   </md-list-item>
                 </template>
               </md-list>
               <iframe
+			  	v-if="nonprofit.location"
                 class="md-layout-item"
                 frameborder="0"
                 style="border:0"
@@ -61,6 +67,9 @@
 </template>
 
 <style lang="scss">
+.hashtag {
+	font-style: italic;
+}
 .image-container {
   display: flex;
   align-items: center;
@@ -113,9 +122,11 @@
             @mixin da-button($color) {
               width: 60%;
               height: 15%;
-              min-width: 110px;
+              min-width: 120px;
+			  min-height: 40px;
               background-color: $color;
               color: white;
+
             }
 
             .da-button-donate {
@@ -164,9 +175,9 @@ export default {
       return makeTweetUrl(this.nonprofit)
     },
     filteredDonations: function() {
-      return this.npDonations.filter(
-        donation => donation.np.id == this.nonprofit.id
-      );
+      return this.npDonations
+        .filter(donation => donation.np.id == this.nonprofit.id)
+        .slice(0, 5);
     }
   },
   watch: {
@@ -177,10 +188,12 @@ export default {
         this.$bind("nonprofit", nonprofits.doc(to.params.id));
         this.$bind("npDonations", donations);
       }
-	},
-	nonprofit: function () {
-		console.log(this.nonprofit.location._lat + " " + this.nonprofit.location._long);
-	}
+    },
+    nonprofit: function() {
+      console.log(
+        this.nonprofit.location._lat + " " + this.nonprofit.location._long
+      );
+    }
   }
 };
 </script>
