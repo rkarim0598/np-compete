@@ -19,15 +19,17 @@
               </div>
             </div>
             <div class="header-bottom">
-              <span class="md-title">About Us</span>
-              <span class="md-body-1">{{ nonprofit.description }}</span>
+              <h3>About Us</h3>
+              <p>{{ nonprofit.description }}</p>
               <a
                 :href="nonprofit.website"
+                target="_blank"
                 class="md-body-1"
               >Visit our website to learn how you can help us!</a>
             </div>
             <div class="md-layout md-gutter">
               <md-list class="md-triple-line md-layout-item md-large-size-50 md-small-size-100 md-xsmall-size-100">
+                <h3>Recent donations to {{ nonprofit.name }}</h3>
                 <template v-for="(donation, index) in filteredDonations">
                   <md-divider v-if="index !== 0"></md-divider>
                   <md-list-item :key="donation.id">
@@ -118,19 +120,12 @@
             justify-content: space-evenly;
             @mixin da-button($color) {
               width: 60%;
-              height: 15%;
-              min-width: 120px;
-              min-height: 40px;
               background-color: $color;
               color: white;
             }
 
             .da-button-donate {
               @include da-button(green);
-            }
-            .da-button-share {
-              @include da-button(blue);
-              margin-left: 8px;
             }
 
             .da-button-twitter {
