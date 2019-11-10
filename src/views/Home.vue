@@ -3,12 +3,15 @@
 		<div class="hero">
 			<h2 class="header">Make a difference to what matters to you</h2>
 			<p>Your donations go farther with <strong>NP Compete</strong>.</p>
+			<p>
+				<md-button class="md-raised" to="/about">Find out more</md-button>
+			</p>
 		</div>
 
 	<div class="home">
 		<div class="md-layout md-gutter">
 			<section class="md-layout-item md-small-size-50 md-xsmall-size-100">
-				<h3>Featured nonprofits</h3>
+				<h3>Nonprofit organizations</h3>
 
 				<md-tabs>
 					<md-tab id="tab-featured" md-label="Featured" md-icon="star">
@@ -19,6 +22,7 @@
 							</template>
 						</md-list>
 					</md-tab>
+
 					<md-tab id="tab-popular" md-label="Popular" md-icon="flag">
 						<md-list class="md-triple-line">
 							<template v-for="(nonprofit, index) in nonprofitsPopular">
@@ -86,6 +90,7 @@ export default {
 		return {
 			donations: [],
 			nonprofitsFeatured: [],
+			nonprofitsPopular: [],
 		}
 	},
 

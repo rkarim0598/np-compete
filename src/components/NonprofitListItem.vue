@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { makeTweetUrl } from '@/utils'
+
 export default {
 	props: {
 		nonprofit: Object,
@@ -26,8 +28,7 @@ export default {
 
     computed: {
         tweetUrl () {
-            const text = encodeURIComponent(`I'm voting for ${this.nonprofit.name} in the #NPCompete challenge! To vote yourself, tweet #${this.nonprofit.hashtag} or donate online`)
-            return `https://twitter.com/intent/tweet?text=${text}`
+            return makeTweetUrl(this.nonprofit)
         },
     },
 }

@@ -13,7 +13,7 @@
               />
               <div class="button-container">
                 <md-button :to="`${nonprofit.id}/donate`" class="md-raised da-button-donate">Donate</md-button>
-                <md-button class="md-raised da-button-twitter">Tweet to Vote</md-button>
+                <md-button :href="tweetUrl" class="md-raised da-button-twitter">Tweet to Vote</md-button>
               </div>
             </div>
             <div class="header-bottom">
@@ -147,6 +147,7 @@
 
 <script>
 import { db } from "@/db";
+import { makeTweetUrl } from '@/utils'
 
 const nonprofits = db.collection("nonprofits");
 const donations = db.collection("donations");
@@ -159,6 +160,9 @@ export default {
     };
   },
   computed: {
+    tweetUrl () {
+      return makeTweetUrl(this.nonprofit)
+    },
     filteredDonations: function() {
       return this.npDonations.filter(
         donation => donation.np.id == this.nonprofit.id
