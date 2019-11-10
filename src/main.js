@@ -15,6 +15,7 @@ import {
 	MdField,
 	MdIcon,
 	MdList,
+	MdSnackbar,
 	MdTabs,
 	MdToolbar,
 	MdCard,
@@ -31,6 +32,7 @@ Vue.use(MdDivider)
 Vue.use(MdField)
 Vue.use(MdIcon)
 Vue.use(MdList)
+Vue.use(MdSnackbar)
 Vue.use(MdTabs)
 Vue.use(MdToolbar)
 Vue.use(MdCard)

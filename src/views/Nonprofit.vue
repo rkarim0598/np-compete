@@ -70,6 +70,11 @@
         <router-link to="/">Return home</router-link>.
       </p>
     </template>
+
+    <md-snackbar :md-duration="Infinity" :md-active.sync="thanks">
+      <span>Thank you! Your donation was processed successfully.</span>
+      <md-button class="md-primary" @click="thanks = false">Close</md-button>
+    </md-snackbar>
   </div>
 </template>
 
@@ -198,7 +203,8 @@ export default {
       nonprofit: null,
       npDonations: null,
       numMentions: 0,
-      loaded: false
+      loaded: false,
+      thanks: false,
     };
   },
   computed: {
@@ -216,6 +222,7 @@ export default {
       // call it upon creation too
       immediate: true,
       handler(to, from) {
+        this.thanks = to.query.thanks === '1';
         this.$bind("nonprofit", nonprofits.doc(to.params.id));
         this.$bind("npDonations", donations);
       }
