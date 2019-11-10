@@ -30,7 +30,7 @@
 									<strong>{{ donation.amount | currency }}</strong> to
 									<strong><router-link :to="'/nonprofits/' + donation.np.id">{{ donation.np.name }}</router-link></strong>
 								</span>
-								<span>{{ donation.timestamp.toDate() }}</span>
+								<span>{{ donation.timestamp.toDate() | dateRelative }} ago</span>
 							</div>
 						</md-list-item>
 					</template>
@@ -42,11 +42,7 @@
 
 <style lang="scss">
 	.home {
-		margin: 10px;
-		margin-top: 0px;
-	}
-	.header {
-		padding-top: 10px;
+		padding: 30px;
 	}
 </style>
 
