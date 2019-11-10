@@ -1,5 +1,5 @@
 <template>
-  <div class="nonprofit-container">
+  <div class="nonprofit-container" v-if="loaded">
     <template v-if="nonprofit">
       <div class="nonprofit-view">
         <md-toolbar id="title-container" :md-elevation="1">
@@ -14,9 +14,11 @@
                 <span
                   class="md-title"
                 >{{ `${nonprofit.votes} ${nonprofit.votes != 1 ? 'votes' : 'vote'}` }}</span>
-                <span
+                <a
+                  target="_blank"
+                  :href="`https://twitter.com/hashtag/${nonprofit.hashtag}`"
                   class="md-title"
-                >{{ `${numMentions} ${numMentions != 1 ? 'Twitter votes' : 'Twitter vote'}`}}</span>
+                >{{ `${numMentions} ${numMentions != 1 ? 'Twitter votes' : 'Twitter vote'}`}}</a>
                 <md-button :to="`${nonprofit.id}/donate`" class="md-raised da-button-donate">Donate</md-button>
                 <md-button :href="tweetUrl" class="md-raised da-button-twitter">Vote</md-button>
               </div>
@@ -195,7 +197,8 @@ export default {
     return {
       nonprofit: null,
       npDonations: null,
-      numMentions: 0
+      numMentions: 0,
+      loaded: false
     };
   },
   computed: {
@@ -216,14 +219,17 @@ export default {
         this.$bind("nonprofit", nonprofits.doc(to.params.id));
         this.$bind("npDonations", donations);
       }
-	},
-	numMentions: function() {
-		console.log(this.numMentions)
-	},
+    },
+    numMentions: function() {
+      console.log(this.numMentions);
+    },
     nonprofit: function() {
-      TweetJs.Search(this.nonprofit.hashtag, (data) => {
-		  this.numMentions = data.statuses.length;
-      })
+      if (this.nonprofit) {
+        this.loaded = true;
+        TweetJs.Search(this.nonprofit.hashtag, data => {
+          this.numMentions = data.statuses.length;
+        });
+      }
     }
   }
 };
