@@ -1,8 +1,11 @@
 <template>
-	<div class="home">
-		<h2 class="header">Make a difference to what matters to you</h2>
-		<p>Your donations go farther with <strong>NP Compete</strong>.</p>
+	<div>
+		<div class="hero">
+			<h2 class="header">Make a difference to what matters to you</h2>
+			<p>Your donations go farther with <strong>NP Compete</strong>.</p>
+		</div>
 
+	<div class="home">
 		<div class="md-layout md-gutter">
 			<section class="md-layout-item md-small-size-50 md-xsmall-size-100">
 				<h3>Featured nonprofits</h3>
@@ -38,12 +41,22 @@
 			</section>
 		</div>
 	</div>
+	</div>
 </template>
 
 <style lang="scss">
-	.home {
-		padding: 30px;
-	}
+.home {
+	padding: 30px;
+}
+
+.hero {
+	padding: 200px 100px;
+	background-image: url('../assets/hero.jpg');
+	background-size: cover;
+	background-position: center;
+	color: white;
+	font-size: 1.5em;
+}
 </style>
 
 <script>
