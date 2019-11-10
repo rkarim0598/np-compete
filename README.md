@@ -1,4 +1,4 @@
-# np-compete
+# [NP Compete](https://np-compete.web.app)
 
 ## Project setup
 ```
