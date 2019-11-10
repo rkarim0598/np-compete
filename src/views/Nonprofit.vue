@@ -12,12 +12,6 @@
                 src="https://cdn.greatnonprofits.org/images/uploads/organizations/fbcover_101536093171036740.jpg"
               />
               <div class="button-container">
-                <span v-if="nonprofit.location">
-                <a
-                  v-if="nonprofit.location"
-                  :href="`http://maps.google.com/maps?q=${nonprofit.location._lat},${nonprofit.location._long}`"
-                  class="md-body-1"
-                >Directions</a>
                 <md-button :to="`${nonprofit.id}/donate`" class="md-raised da-button-donate">Donate</md-button>
                 <md-button class="md-raised da-button-twitter">Tweet to Vote</md-button>
               </div>
@@ -44,13 +38,13 @@
                   </md-list-item>
                 </template>
               </md-list>
-              <!-- <iframe
+              <iframe
                 class="md-layout-item"
                 frameborder="0"
                 style="border:0"
-                :src="`https://www.google.com/maps/embed/v1/location?center=${nonprofit.location._lat},${nonprofit.location._long}&zoom=8&key=AIzaSyCFtSAQ7lAc-LZUQzfmNQ5zE5zqYLcjzAI`"
+                :src="`https://www.google.com/maps/embed/v1/place?q=${nonprofit.location._lat}%2C${nonprofit.location._long}&zoom=15&key=AIzaSyCFtSAQ7lAc-LZUQzfmNQ5zE5zqYLcjzAI`"
                 allowfullscreen
-              ></iframe> -->
+              ></iframe>
             </div>
           </div>
         </md-card-content>
@@ -161,7 +155,7 @@ export default {
   data() {
     return {
       nonprofit: null,
-      npDonations: null,
+      npDonations: null
     };
   },
   computed: {
@@ -179,7 +173,10 @@ export default {
         this.$bind("nonprofit", nonprofits.doc(to.params.id));
         this.$bind("npDonations", donations);
       }
-    }
+	},
+	nonprofit: function () {
+		console.log(this.nonprofit.location._lat + " " + this.nonprofit.location._long);
+	}
   }
 };
 </script>
