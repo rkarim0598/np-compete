@@ -1,0 +1,1 @@
+exports.stripe = 'sk_test_jDmhGgEtDtwtNS1ieXCWx8YD00FPrDbKKf';

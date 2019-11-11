@@ -6,9 +6,8 @@ const stripe = require('stripe')(creds.stripe);
 const FieldValue = admin.firestore.FieldValue;
 
 exports.donate = functions.https.onRequest(async (req, res) => {
+    const body = req.body;
     try {
-        const body = req.body;
-
         let data = {
             amount: parseFloat(body.amount),
             authorized: 'false',
@@ -53,10 +52,14 @@ exports.donate = functions.https.onRequest(async (req, res) => {
             timestamp: FieldValue.serverTimestamp()
         });
 
+        const donatePromise = db.collection('nonprofits').doc(body.npid).update({
+            votes: FieldValue.increment(Math.floor(parseFloat(body.amount)/10))
+        });
+
         console.debug(charge);
     } catch (e) {
         console.error(e);
     }
     
-    res.redirect("http://localhost:8080");
+    res.redirect(`https://np-compete.web.app/#/nonprofits/${body.npid}?thanks=1`);
 });
